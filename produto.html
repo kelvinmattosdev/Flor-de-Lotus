@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR" data-type="product" data-radius="soft" data-buttons="solid" data-motion data-motion-choice="auto" data-motion-effective="reduced">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="page-type" content="product">
+  <meta name="site-kind" content="other">
+  <meta name="theme-color" content="#fbf7f0">
+  <meta name="description" content="Conheça uma referência de artesanato ou livro da Flor de Lotus. Preços, avaliações e compra exclusivamente demonstrativos.">
+  <meta property="og:title" content="Produto · Flor de Lotus">
+  <meta property="og:description" content="Artesanato e sebo. Experiência de compra fictícia para teste local.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/marca/identidade-736.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Produto · Flor de Lotus</title>
+  <link rel="icon" type="image/jpeg" href="/images/marca/assinatura-64.jpg">
+  <link rel="preload" href="/fonts/cormorant-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{const r=document.documentElement,k=localStorage.getItem('flor-de-lotus:motion:v1'),c=['auto','full','reduced'].includes(k)?k:'auto';r.dataset.motionChoice=c;r.dataset.motionEffective=c==='full'||c==='auto'&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'full':'reduced'}catch{document.documentElement.dataset.motionEffective=matchMedia('(prefers-reduced-motion: reduce)').matches?'reduced':'full'}</script>
+  <link rel="stylesheet" href="/src/styles.css">
+  <link rel="stylesheet" href="/src/motion.css">
+</head>
+<body data-page="product">
+  <!-- CHANGE-003: own-store product page, not a marketplace. Honest gallery and demo data.
+       Original short WAAPI transitions with immediate functional state and reduced-motion fallback. -->
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div id="storefront-header"></div>
+  <main id="conteudo" tabindex="-1">
+    <div class="wrap shop-load-row"><p id="product-load-status" role="status">Carregando anúncio…</p><button class="text-button" id="product-retry" type="button">Consultar anúncio novamente</button></div>
+    <div id="product-page"></div>
+    <noscript><div class="wrap not-found"><h1>Produto da Flor de Lotus</h1><p>Ative o JavaScript para ver a referência e a compra demonstrativa.</p><a href="/index.html#colecao">Voltar à coleção</a></div></noscript>
+  </main>
+  <div id="storefront-footer"></div>
+  <div id="storefront-dialogs"></div>
+  <script type="module" src="/src/product.js"></script>
+</body>
+</html>

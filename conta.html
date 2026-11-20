@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR" data-type="product" data-radius="soft" data-buttons="solid" data-motion data-motion-choice="auto" data-motion-effective="reduced">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="page-type" content="product">
+  <meta name="site-kind" content="other">
+  <meta name="theme-color" content="#fbf7f0">
+  <meta name="description" content="Conta de teste e compras fictícias na demonstração local da Flor de Lotus. Não use dados reais.">
+  <meta property="og:title" content="Minha conta · Flor de Lotus">
+  <meta property="og:description" content="Conta e compras de demonstração. Sem cobranças ou entregas reais.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/marca/identidade-736.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Minha conta · Flor de Lotus</title>
+  <link rel="icon" type="image/jpeg" href="/images/marca/assinatura-64.jpg">
+  <link rel="preload" href="/fonts/cormorant-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{const r=document.documentElement,k=localStorage.getItem('flor-de-lotus:motion:v1'),c=['auto','full','reduced'].includes(k)?k:'auto';r.dataset.motionChoice=c;r.dataset.motionEffective=c==='full'||c==='auto'&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'full':'reduced'}catch{document.documentElement.dataset.motionEffective=matchMedia('(prefers-reduced-motion: reduce)').matches?'reduced':'full'}</script>
+  <link rel="stylesheet" href="/src/styles.css">
+  <link rel="stylesheet" href="/src/motion.css">
+</head>
+<body data-page="account">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div id="storefront-header"></div>
+  <main class="wrap shop-account" id="conteudo" tabindex="-1">
+    <header class="shop-account-heading" data-page-enter><p class="eyebrow">Flor de Lotus · demonstração</p><h1 id="account-title" tabindex="-1">Sua conta,<br><em>suas experiências.</em></h1><p>Escolha um nome de usuário para entrar e um apelido para a loja chamar você. Use somente nomes inventados e uma senha exclusiva de teste. Não informe email, CPF, endereço ou dados de cartão. As compras ficam no arquivo local da loja, sem cobrança ou entrega real.</p><a class="text-button" href="/index.html?checkout=1#colecao">Retomar minha sacola</a></header>
+    <p id="account-status" role="status">Consultando sessão…</p>
+    <button class="text-button" id="account-retry" type="button">Atualizar sessão e compras</button>
+    <section id="account-session" aria-label="Sessão e acesso"></section>
+    <section id="account-orders" aria-label="Minhas compras fictícias"></section>
+    <section id="account-order-detail" aria-label="Detalhe da minha compra"></section>
+    <noscript>Ative JavaScript para acessar a conta de teste e a API local.</noscript>
+  </main>
+  <div id="storefront-footer"></div><div id="storefront-dialogs"></div>
+  <script type="module" src="/src/shop/account.js"></script>
+</body>
+</html>

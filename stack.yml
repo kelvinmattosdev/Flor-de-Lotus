@@ -1,0 +1,74 @@
+# MODELO Swarm: imagem Node/API prebuilt; nunca executar build aqui.
+version: "3.8"
+services:
+  prototipo:
+    image: "${APP_IMAGE:?Informe a referencia completa da imagem privada}"
+    environment:
+      NODE_ENV: production
+      FDL_BIND_HOST: "0.0.0.0"
+      FDL_PORT: "8080"
+      FDL_STATIC_DIR: /opt/fdl/static
+      FDL_DATA_DIR: /data
+      FDL_SHOP_ORIGIN: "https://prototipo-flor-de-lotus-carlone.kelbyte.com.br"
+      FDL_OPERATOR_ORIGIN: "https://${OPERATOR_HOST:?Informe o FQDN distinto do operador sem esquema ou caminho}"
+      FDL_DATA_VOLUME_ID: "${FDL_DATA_VOLUME_ID:?Informe o identificador do volume provisionado}"
+    volumes:
+      - type: volume
+        source: fdl_data
+        target: /data
+        volume:
+          nocopy: true
+    networks:
+      - traefik
+    stop_grace_period: 45s
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.hostname == ${FDL_DATA_NODE:?Informe o hostname Swarm do unico no provisionado}"
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 768M
+        reservations:
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 180s
+      update_config:
+        parallelism: 1
+        order: stop-first
+        failure_action: pause
+        monitor: 150s
+      rollback_config:
+        parallelism: 1
+        order: stop-first
+        failure_action: pause
+        monitor: 150s
+      labels:
+        - "traefik.enable=true"
+        # v3/provider Swarm vs v2/Docker swarmMode: escolha explicita.
+        - "${TRAEFIK_NETWORK_LABEL:?Escolha traefik.swarm.network ou traefik.docker.network}=${TRAEFIK_NETWORK:?Informe a overlay externa existente}"
+        - "traefik.http.routers.fdl-carlone-prototipo.rule=Host(`prototipo-flor-de-lotus-carlone.kelbyte.com.br`)"
+        - "traefik.http.routers.fdl-carlone-prototipo.entrypoints=${HTTPS_ENTRYPOINT:?Informe o entrypoint HTTPS existente}"
+        - "traefik.http.routers.fdl-carlone-prototipo.tls=true"
+        - "traefik.http.routers.fdl-carlone-prototipo.service=fdl-carlone-prototipo"
+        - "traefik.http.routers.fdl-carlone-operador.rule=Host(`${OPERATOR_HOST:?Informe o FQDN distinto do operador}`)"
+        - "traefik.http.routers.fdl-carlone-operador.entrypoints=${HTTPS_ENTRYPOINT:?Informe o entrypoint HTTPS existente}"
+        - "traefik.http.routers.fdl-carlone-operador.tls=true"
+        - "traefik.http.routers.fdl-carlone-operador.service=fdl-carlone-prototipo"
+        # Wildcard/default JA configurado: remover AMBAS as labels resolver abaixo.
+        - "traefik.http.routers.fdl-carlone-prototipo.tls.certresolver=${TRAEFIK_CERTRESOLVER:?Informe o resolver TLS existente ou remova as duas labels conforme nota}"
+        - "traefik.http.routers.fdl-carlone-operador.tls.certresolver=${TRAEFIK_CERTRESOLVER:?Informe o resolver TLS existente ou remova as duas labels conforme nota}"
+        - "traefik.http.services.fdl-carlone-prototipo.loadbalancer.server.port=8080"
+networks:
+  traefik:
+    external: true
+    name: "${TRAEFIK_NETWORK:?Informe a overlay externa existente}"
+volumes:
+  fdl_data:
+    external: true
+    name: "${FDL_DATA_VOLUME:?Informe o volume externo privado preparado no no escolhido}"
